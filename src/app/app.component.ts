@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   appTitle = 'Utilities';
-
-  title = 'tools';
 }
