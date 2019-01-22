@@ -6,7 +6,7 @@ import { ContactComponent } from './contact/contact.component';
 import { SqlListBuilderComponent } from './sql-list-builder/sql-list-builder.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: SqlListBuilderComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'sql-list-builder', component: SqlListBuilderComponent },
