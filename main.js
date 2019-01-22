@@ -92,11 +92,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./about/about.component */ "./src/app/about/about.component.ts");
-/* harmony import */ var _contact_contact_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contact/contact.component */ "./src/app/contact/contact.component.ts");
-/* harmony import */ var _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./sql-list-builder/sql-list-builder.component */ "./src/app/sql-list-builder/sql-list-builder.component.ts");
-
+/* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./about/about.component */ "./src/app/about/about.component.ts");
+/* harmony import */ var _contact_contact_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contact/contact.component */ "./src/app/contact/contact.component.ts");
+/* harmony import */ var _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sql-list-builder/sql-list-builder.component */ "./src/app/sql-list-builder/sql-list-builder.component.ts");
 
 
 
@@ -104,10 +102,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
-    { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"] },
-    { path: 'about', component: _about_about_component__WEBPACK_IMPORTED_MODULE_4__["AboutComponent"] },
-    { path: 'contact', component: _contact_contact_component__WEBPACK_IMPORTED_MODULE_5__["ContactComponent"] },
-    { path: 'sql-list-builder', component: _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_6__["SqlListBuilderComponent"] },
+    { path: '', component: _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_5__["SqlListBuilderComponent"] },
+    { path: 'about', component: _about_about_component__WEBPACK_IMPORTED_MODULE_3__["AboutComponent"] },
+    { path: 'contact', component: _contact_contact_component__WEBPACK_IMPORTED_MODULE_4__["ContactComponent"] },
+    { path: 'sql-list-builder', component: _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_5__["SqlListBuilderComponent"] },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
