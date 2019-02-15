@@ -1,24 +1,27 @@
-<h1>SQL List Builder</h1>
+<h1>List Builder</h1>
 
-<div class="aParent">
-  <div class="inputDiv">
-    <form [formGroup]="sqlListBuilder" (ngSubmit)="onSubmit()">
-
-        <label>
-          Enter your items:
+<div class="row">
+  <div class="column">
+    <form [formGroup]="sqlListBuilder" (ngSubmit)="onSubmit(buttonType)">
+        <label>Enter your items:</label>
           <textarea formControlName="items" rows="25"></textarea>
           <div *ngIf="submitted && sqlListBuilder.controls.items.errors" class="error">
             <div *ngIf="sqlListBuilder.controls.items.errors.required">Must enter at least one item</div>
           </div>
-        </label>
-
-        <input type="submit" value="Generate SQL list" class="cta">
-      
-      </form>
-    </div>
-
+          <div class="row">
+            <div class="column">
+              <button type="button" (click)="onSubmit('SQL')" class="cta">SQL</button>
+            </div>
+            <div class="column">
+              <button type="button" (click)="onSubmit('PYTHON')" class="cta">Python</button>
+            </div>         
+          </div>
+        </form>
+  </div>
+  <div class="column">
     <div *ngIf="submitted" class="results">
-      <label>SQL Query</label> 
+      <label>Result</label> 
       <textarea rows="25" readonly>{{ results }}</textarea>    
     </div>
+  </div>
 </div>

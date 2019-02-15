@@ -20,7 +20,18 @@ export class SqlListBuilderComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(buttonType) {
+    console.log(buttonType)
+    var braceOne = '';
+    var braceTwo = '';
+    if(buttonType==="SQL") {
+      braceOne = '(';
+      braceTwo = ')';
+    }
+    if(buttonType==="PYTHON"){
+      braceOne = '[';
+      braceTwo = ']';    
+    }
     this.submitted = true;
 
     if (this.sqlListBuilder.invalid) {
@@ -28,17 +39,16 @@ export class SqlListBuilderComponent implements OnInit {
     }
 
     this.success = true;
-    this.results = 'SELECT * FROM TABLE\nWHERE COLUMN in (\n';
+    this.results = braceOne+'\n';
     var lines = this.sqlListBuilder.get('items').value.split('\n');
     for(var i = 0;i < lines.length;i++){
         //code here using lines[i] which will give you each line
         this.results += '\''+ lines[i] +'\'';
         if (i == lines.length-1) {
-          this.results += '\n);';
+          this.results += '\n'+braceTwo;
           //  block of code to be executed if the condition is true
         } else { 
           this.results += ',\n';
-
           //  block of code to be executed if the condition is false
         }
     }
