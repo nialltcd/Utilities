@@ -95,6 +95,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _about_about_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./about/about.component */ "./src/app/about/about.component.ts");
 /* harmony import */ var _contact_contact_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contact/contact.component */ "./src/app/contact/contact.component.ts");
 /* harmony import */ var _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sql-list-builder/sql-list-builder.component */ "./src/app/sql-list-builder/sql-list-builder.component.ts");
+/* harmony import */ var _list_diff_list_diff_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./list-diff/list-diff.component */ "./src/app/list-diff/list-diff.component.ts");
+
 
 
 
@@ -106,6 +108,7 @@ var routes = [
     { path: 'about', component: _about_about_component__WEBPACK_IMPORTED_MODULE_3__["AboutComponent"] },
     { path: 'contact', component: _contact_contact_component__WEBPACK_IMPORTED_MODULE_4__["ContactComponent"] },
     { path: 'sql-list-builder', component: _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_5__["SqlListBuilderComponent"] },
+    { path: 'list-diff', component: _list_diff_list_diff_component__WEBPACK_IMPORTED_MODULE_6__["ListDiffComponent"] },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -198,10 +201,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sql-list-builder/sql-list-builder.component */ "./src/app/sql-list-builder/sql-list-builder.component.ts");
+/* harmony import */ var _list_diff_list_diff_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./list-diff/list-diff.component */ "./src/app/list-diff/list-diff.component.ts");
 
 
 
  // Added here
+
 
 
 
@@ -220,7 +225,8 @@ var AppModule = /** @class */ (function () {
                 _about_about_component__WEBPACK_IMPORTED_MODULE_6__["AboutComponent"],
                 _contact_contact_component__WEBPACK_IMPORTED_MODULE_7__["ContactComponent"],
                 _home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"],
-                _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_10__["SqlListBuilderComponent"]
+                _sql_list_builder_sql_list_builder_component__WEBPACK_IMPORTED_MODULE_10__["SqlListBuilderComponent"],
+                _list_diff_list_diff_component__WEBPACK_IMPORTED_MODULE_11__["ListDiffComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -350,6 +356,139 @@ var HomeComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/list-diff/list-diff.component.html":
+/*!****************************************************!*\
+  !*** ./src/app/list-diff/list-diff.component.html ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>List Differ</h1>\n\n<!-- First row - contains input forms --> \n<form [formGroup]=\"listDiffer\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"row\">\n    <div class=\"twocolumn\">\n        <label>List A</label>\n        <textarea formControlName=\"listOne\" rows=\"20\"></textarea>\n    </div>\n    <div class=\"twocolumn\">\n        <label>List B</label>\n        <textarea formControlName=\"listTwo\" rows=\"20\"></textarea>\n    </div>\n  </div>\n  <div class=\"row\">\n      <button type=\"button\" (click)=\"onSubmit()\" class=\"cta\">DIFF LISTS</button>\n  </div>\n</form>\n\n<!-- Output --> \n<div *ngIf=\"submitted\">\n  <div class=\"row\" > \n      <div class=\"twocolumn\"> \n        <label>A - B ({{ aOnlyCount }})</label>\n        <textarea rows=\"12\" readonly>{{ aOnly }}</textarea>\n      </div>\n      <div class=\"twocolumn\">\n        <label>B - A ({{ bOnlyCount }})</label>\n        <textarea rows=\"12\" readonly>{{ bOnly }}</textarea>\n      </div>\n  </div>\n  <div class=\"row\">\n      <div class=\"twocolumn\">\n        <label>A ∪ B ({{ aUnionBCount }})</label>\n        <textarea rows=\"12\" readonly>{{ aUnionB }}</textarea>\n      </div>\n      <div class=\"twocolumn\">   \n        <label>A ∩ B ({{ aIntersectionBCount }})</label>\n        <textarea rows=\"12\" readonly>{{ aIntersectionB }}</textarea>\n      </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"column\">\n      <label>(A ∪ B) - (A ∩ B) ({{ aUnionBLessAIntersectionBCount }})</label>\n      <textarea rows=\"12\" readonly>{{ aUnionBLessAIntersectionB }}</textarea>\n    </div>\n  </div>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/list-diff/list-diff.component.scss":
+/*!****************************************************!*\
+  !*** ./src/app/list-diff/list-diff.component.scss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "* {\n  box-sizing: border-box; }\n\n.row {\n  display: flex; }\n\n@media screen and (max-width: 600px) {\n  .column {\n    width: 100%; } }\n\nform {\n  display: block; }\n\nform button, form textarea {\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n    width: 90%;\n    margin-bottom: 20px;\n    padding: 1em; }\n\nform .error {\n    margin-top: -20px;\n    background: yellow;\n    padding: .5em;\n    display: inline-block;\n    font-size: .9em;\n    margin-bottom: 20px; }\n\nlabel {\n  text-align: center;\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n  width: 90%;\n  padding: 1em; }\n\n.column {\n  text-align: center;\n  width: 50%;\n  padding: 10px;\n  padding: 10px; }\n\n.twocolumn {\n  float: left;\n  width: 50%;\n  padding: 10px;\n  padding: 10px; }\n\n.threecolumn {\n  float: left;\n  width: 33%;\n  padding: 10px;\n  padding: 10px; }\n\ntextarea {\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n  width: 90%;\n  margin-bottom: 20px;\n  padding: 1em; }\n\n.cta {\n  background: #7700FF;\n  border: none;\n  color: white;\n  text-transform: uppercase;\n  border-radius: 4px;\n  padding: 1em;\n  cursor: pointer;\n  font-family: 'Montserrat'; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbGlzdC1kaWZmL0M6XFxVc2Vyc1xcTmlhbGxcXERvY3VtZW50c1xcUHJvZ3JhbW1pbmdcXEFuZ3VsYXJcXHRvb2xzL3NyY1xcYXBwXFxsaXN0LWRpZmZcXGxpc3QtZGlmZi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNBLHNCQUFzQixFQUFBOztBQUd0QjtFQUNBLGFBQWEsRUFBQTs7QUFHYjtFQUNJO0lBQ0UsV0FBVyxFQUFBLEVBQ1o7O0FBR0w7RUFDSSxjQUFjLEVBQUE7O0FBRGxCO0lBSVEsY0FBYztJQUNkLGlCQUFpQjtJQUNqQixrQkFBa0I7SUFDbEIsVUFBVTtJQUNWLG1CQUFtQjtJQUNuQixZQUFZLEVBQUE7O0FBVHBCO0lBYVEsaUJBQWlCO0lBQ2pCLGtCQUFrQjtJQUNsQixhQUFhO0lBQ2IscUJBQXFCO0lBQ3JCLGVBQWU7SUFDZixtQkFBbUIsRUFBQTs7QUFJM0I7RUFDSSxrQkFBa0I7RUFDbEIsY0FBYztFQUNkLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsVUFBVTtFQUNWLFlBQVksRUFBQTs7QUFHaEI7RUFDSSxrQkFBa0I7RUFDbEIsVUFBVTtFQUNWLGFBQWE7RUFDYixhQUFhLEVBQUE7O0FBR2pCO0VBQ0ksV0FBVztFQUNYLFVBQVU7RUFDVixhQUFhO0VBQ2IsYUFBYSxFQUFBOztBQUdqQjtFQUNJLFdBQVc7RUFDWCxVQUFVO0VBQ1YsYUFBYTtFQUNiLGFBQWEsRUFBQTs7QUFHakI7RUFDSSxjQUFjO0VBQ2QsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixVQUFVO0VBQ1YsbUJBQW1CO0VBQ25CLFlBQVksRUFBQTs7QUFHaEI7RUFDSSxtQkFBbUI7RUFDbkIsWUFBWTtFQUNaLFlBQVk7RUFFWix5QkFBeUI7RUFDekIsa0JBQWtCO0VBQ2xCLFlBQVk7RUFDWixlQUFlO0VBQ2YseUJBQXlCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9saXN0LWRpZmYvbGlzdC1kaWZmLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiKiB7XHJcbmJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbn1cclxuXHJcbi5yb3cge1xyXG5kaXNwbGF5OiBmbGV4O1xyXG59XHJcblxyXG5AbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xyXG4gICAgLmNvbHVtbiB7XHJcbiAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbmZvcm0ge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBcclxuICAgIGJ1dHRvbiwgdGV4dGFyZWEge1xyXG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiBhdXRvO1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogYXV0bztcclxuICAgICAgICB3aWR0aDogOTAlO1xyXG4gICAgICAgIG1hcmdpbi1ib3R0b206IDIwcHg7XHJcbiAgICAgICAgcGFkZGluZzogMWVtO1xyXG4gICAgfVxyXG5cclxuICAgIC5lcnJvciB7XHJcbiAgICAgICAgbWFyZ2luLXRvcDogLTIwcHg7XHJcbiAgICAgICAgYmFja2dyb3VuZDogeWVsbG93O1xyXG4gICAgICAgIHBhZGRpbmc6IC41ZW07XHJcbiAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgICAgIGZvbnQtc2l6ZTogLjllbTtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG4gICAgfVxyXG59XHJcblxyXG5sYWJlbCB7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxuICAgIG1hcmdpbi1sZWZ0OiBhdXRvO1xyXG4gICAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xyXG4gICAgd2lkdGg6IDkwJTtcclxuICAgIHBhZGRpbmc6IDFlbTtcclxufVxyXG5cclxuLmNvbHVtbiB7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICB3aWR0aDogNTAlO1xyXG4gICAgcGFkZGluZzogMTBweDtcclxuICAgIHBhZGRpbmc6IDEwcHg7XHJcbiAgICB9XHJcblxyXG4udHdvY29sdW1uIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgd2lkdGg6IDUwJTtcclxuICAgIHBhZGRpbmc6IDEwcHg7XHJcbiAgICBwYWRkaW5nOiAxMHB4O1xyXG4gICAgfVxyXG5cclxuLnRocmVlY29sdW1uIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgd2lkdGg6IDMzJTtcclxuICAgIHBhZGRpbmc6IDEwcHg7XHJcbiAgICBwYWRkaW5nOiAxMHB4O1xyXG4gICAgfVxyXG5cclxudGV4dGFyZWEge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBtYXJnaW4tbGVmdDogYXV0bztcclxuICAgIG1hcmdpbi1yaWdodDogYXV0bztcclxuICAgIHdpZHRoOiA5MCU7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG4gICAgcGFkZGluZzogMWVtO1xyXG59XHJcblxyXG4uY3RhIHtcclxuICAgIGJhY2tncm91bmQ6ICM3NzAwRkY7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcblxyXG4gICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDRweDtcclxuICAgIHBhZGRpbmc6IDFlbTtcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgIGZvbnQtZmFtaWx5OiAnTW9udHNlcnJhdCc7XHJcbn0iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/list-diff/list-diff.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/list-diff/list-diff.component.ts ***!
+  \**************************************************/
+/*! exports provided: ListDiffComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListDiffComponent", function() { return ListDiffComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+
+
+
+var ListDiffComponent = /** @class */ (function () {
+    function ListDiffComponent(formBuilder) {
+        this.formBuilder = formBuilder;
+        this.submitted = false;
+        this.aOnly = '';
+        this.bOnly = '';
+        this.aUnionB = '';
+        this.aIntersectionB = '';
+        this.aUnionBLessAIntersectionB = '';
+        this.aOnlyCount = '';
+        this.bOnlyCount = '';
+        this.aUnionBCount = '';
+        this.aIntersectionBCount = '';
+        this.aUnionBLessAIntersectionBCount = '';
+    }
+    ListDiffComponent.prototype.ngOnInit = function () {
+        this.listDiffer = this.formBuilder.group({
+            listOne: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            listTwo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+        });
+    };
+    ListDiffComponent.prototype.onSubmit = function () {
+        var a = this.listDiffer.get('listOne').value.split('\n');
+        if (a[0] === '')
+            a = [];
+        var b = this.listDiffer.get('listTwo').value.split('\n');
+        if (b[0] === '')
+            b = [];
+        // Filter duplicates out of the lists
+        var unique = function (xs) {
+            return xs.filter(function (x, i) {
+                return xs.indexOf(x) === i;
+            });
+        };
+        var format = function (xs) {
+            return xs.filter(function (x, i) {
+                return xs.indexOf(x) === i;
+            });
+        };
+        var aUnique = unique(a);
+        var bUnique = unique(b);
+        // Get unique elements in the lists
+        var aOnly = aUnique.filter(function (el) {
+            return !bUnique.includes(el);
+        });
+        var bOnly = bUnique.filter(function (el) {
+            return !aUnique.includes(el);
+        });
+        // Union of the two lists
+        var aUnionB = aOnly.concat(bUnique);
+        // Intersection of the two lists
+        var aIntersectionB = aUnionB.filter(function (el) {
+            return aUnique.includes(el) && bUnique.includes(el);
+        });
+        // (A U B) - (A n B)
+        var aUnionBLessAIntersectionB = aUnionB.filter(function (el) {
+            return !aIntersectionB.includes(el);
+        });
+        this.submitted = true;
+        this.aOnly = aOnly.join('\n');
+        this.bOnly = bOnly.join('\n');
+        this.aUnionB = aUnionB.join('\n');
+        this.aIntersectionB = aIntersectionB.join('\n');
+        this.aUnionBLessAIntersectionB = aUnionBLessAIntersectionB.join('\n');
+        this.aOnlyCount = aOnly.length;
+        this.bOnlyCount = bOnly.length;
+        this.aUnionBCount = aUnionB.length;
+        this.aIntersectionBCount = aIntersectionB.length;
+        this.aUnionBLessAIntersectionBCount = aUnionBLessAIntersectionB.length;
+        console.log("A Only");
+        console.log(this.aOnly);
+        console.log("B Only");
+        console.log(this.bOnly);
+        console.log("A U B");
+        console.log(aUnionB);
+        console.log("A n B");
+        console.log(aIntersectionB);
+        console.log("(A U B) - (A n B)");
+        console.log(aUnionBLessAIntersectionB);
+    };
+    ListDiffComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-list-diff',
+            template: __webpack_require__(/*! ./list-diff.component.html */ "./src/app/list-diff/list-diff.component.html"),
+            styles: [__webpack_require__(/*! ./list-diff.component.scss */ "./src/app/list-diff/list-diff.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]])
+    ], ListDiffComponent);
+    return ListDiffComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/nav/nav.component.html":
 /*!****************************************!*\
   !*** ./src/app/nav/nav.component.html ***!
@@ -357,7 +496,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<header>\n  <div class=\"container\">\n    <a routerLink=\"/\" class=\"logo\">{{ appTitle }}</a>\n    <nav>\n      <ul>\n        <li><a routerLink=\"/sql-list-builder\">SQL List Builder</a></li>\n      </ul>\n    </nav>\n  </div>\n</header>\n"
+module.exports = "<header>\n  <div class=\"container\">\n    <a routerLink=\"/\" class=\"logo\">{{ appTitle }}</a>\n    <nav>\n      <ul>\n        <li>\n          <a routerLink=\"/sql-list-builder\">List Builder</a>\n          <a routerLink=\"/list-diff\">List Differ</a>\n        </li>\n      </ul>\n    </nav>\n  </div>\n</header>\n"
 
 /***/ }),
 
