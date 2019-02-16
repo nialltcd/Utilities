@@ -1,0 +1,49 @@
+<h1>List Differ</h1>
+
+<!-- First row - contains input forms --> 
+<form [formGroup]="listDiffer" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="twocolumn">
+        <label>List A</label>
+        <textarea formControlName="listOne" rows="20"></textarea>
+    </div>
+    <div class="twocolumn">
+        <label>List B</label>
+        <textarea formControlName="listTwo" rows="20"></textarea>
+    </div>
+  </div>
+  <div class="row">
+      <button type="button" (click)="onSubmit()" class="cta">DIFF LISTS</button>
+  </div>
+</form>
+
+<!-- Output --> 
+<div *ngIf="submitted">
+  <div class="row" > 
+      <div class="twocolumn"> 
+        <label>A - B ({{ aOnlyCount }})</label>
+        <textarea rows="12" readonly>{{ aOnly }}</textarea>
+      </div>
+      <div class="twocolumn">
+        <label>B - A ({{ bOnlyCount }})</label>
+        <textarea rows="12" readonly>{{ bOnly }}</textarea>
+      </div>
+  </div>
+  <div class="row">
+      <div class="twocolumn">
+        <label>A ∪ B ({{ aUnionBCount }})</label>
+        <textarea rows="12" readonly>{{ aUnionB }}</textarea>
+      </div>
+      <div class="twocolumn">   
+        <label>A ∩ B ({{ aIntersectionBCount }})</label>
+        <textarea rows="12" readonly>{{ aIntersectionB }}</textarea>
+      </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <label>(A ∪ B) - (A ∩ B) ({{ aUnionBLessAIntersectionBCount }})</label>
+      <textarea rows="12" readonly>{{ aUnionBLessAIntersectionB }}</textarea>
+    </div>
+  </div>
+</div>
+

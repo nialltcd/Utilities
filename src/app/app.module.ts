@@ -9,6 +9,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SqlListBuilderComponent } from './sql-list-builder/sql-list-builder.component';
+import { ListDiffComponent } from './list-diff/list-diff.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SqlListBuilderComponent } from './sql-list-builder/sql-list-builder.com
     AboutComponent,
     ContactComponent,
     HomeComponent,
-    SqlListBuilderComponent
+    SqlListBuilderComponent,
+    ListDiffComponent
   ],
   imports: [
     BrowserModule,
